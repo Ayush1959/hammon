@@ -48,7 +48,7 @@ export default {
     return {
       studentList: [],
       loading: false,
-      errors: "",
+      error: "",
       detailsFormVisible: false,
       id: ""
     };

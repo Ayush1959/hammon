@@ -1,34 +1,32 @@
-import HelloWorld from "./components/HelloWorld.vue";
-import HomeIndex from "./components/Home.vue";
+// import HelloWorld from "./components/HelloWorld.vue";
+// import HomeIndex from "./components/Home.vue";
 import SubjectIndex from "./components/SubjectIndex.vue";
 import StudentsIndex from "./components/StudentsIndex.vue";
 import ClassroomIndex from "./components/ClassroomIndex.vue";
+import RegistrationsIndex from "./components/RegistrationIndex.vue";
 
-const Home = resolve => {
-    require.ensure(["./components/HelloWorld.vue"], () => {
-        resolve(require("./components/HelloWorld.vue"));
-    });
-};
+
+// const Home = resolve => {
+//     require.ensure(["./components/HelloWorld.vue"], () => {
+//         resolve(require("./components/HelloWorld.vue"));
+//     });
+// };
 
 
 export const routes = [{
-        path: "/",
-        components: {
-            Index: HomeIndex
+        path: "*",
+        redirect: {
+            name: "students"
         }
     },
-    {
-        path: "/home",
-        components: {
-            Index: HelloWorld
-        }
 
-    },
     {
         path: "/students",
         components: {
             Index: StudentsIndex
-        }
+        },
+        name: "students"
+
 
     },
     {
@@ -46,8 +44,9 @@ export const routes = [{
 
     },
     {
-        path: "/test",
-        component: Home,
-        name: "Home"
+        path: "/registrations",
+        components: {
+            Index: RegistrationsIndex
+        }
     },
 ];

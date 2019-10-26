@@ -16,6 +16,11 @@
           <router-link :class="{'active': url == 'classrooms'}" to="/classrooms">Classrooms</router-link>
         </a>
       </li>
+      <li class="nav-item" @click="menuClick">
+        <a class="nav-link">
+          <router-link :class="{'active': url == 'registrations'}" to="/registrations">Registrations</router-link>
+        </a>
+      </li>
     </ul>
   </nav>
 </template>

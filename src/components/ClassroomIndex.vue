@@ -16,17 +16,40 @@
             show-overflow-tooltip
           ></el-table-column>
           <el-table-column prop="size" min-width="150" sortable label="Size" show-overflow-tooltip></el-table-column>
+          <el-table-column min-width="100" label="Actions" show-overflow-tooltip>
+            <template slot-scope="students">
+              <el-tooltip effect="light" content="Details" placement="bottom" class="mr-5">
+                <a
+                  class="el-icon-view pointer"
+                  @click="id = students.row.id; detailsFormVisible = true"
+                ></a>
+              </el-tooltip>
+              <el-tooltip effect="light" content="Assign" placement="bottom" class="mr-5">
+                <a
+                  class="el-icon-thumb pointer"
+                  @click="id = students.row.id; assignFormVisible = true"
+                ></a>
+              </el-tooltip>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
+    <Details :detailsFormVisible.sync="detailsFormVisible" :id.sync="id"></Details>
+    <Assign :assignFormVisible.sync="assignFormVisible" :id.sync="id"></Assign>
   </div>
 </template>
 
 <script>
 import MenuBar from "./menuBar.vue";
+import Details from "./subComponents/classroomDetails.vue";
+import Assign from "./subComponents/assignSubject.vue";
+
 export default {
   components: {
-    MenuBar
+    MenuBar,
+    Details,
+    Assign
   },
   mounted() {
     this.getResultsPage();
@@ -35,7 +58,10 @@ export default {
     return {
       classroomList: [],
       loading: false,
-      errors: ""
+      error: "",
+      detailsFormVisible: false,
+      assignFormVisible: false,
+      id: ""
     };
   },
   methods: {

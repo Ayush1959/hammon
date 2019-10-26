@@ -22,17 +22,30 @@
             label="Credits"
             show-overflow-tooltip
           ></el-table-column>
+          <el-table-column min-width="50" label="Actions" show-overflow-tooltip>
+            <template slot-scope="students">
+              <el-tooltip effect="light" content="Details" placement="bottom" class="mr-5">
+                <a
+                  class="el-icon-view pointer"
+                  @click="id = students.row.id; detailsFormVisible = true"
+                ></a>
+              </el-tooltip>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
+    <Details :detailsFormVisible.sync="detailsFormVisible" :id.sync="id"></Details>
   </div>
 </template>
 
 <script>
 import MenuBar from "./menuBar.vue";
+import Details from "./subComponents/subjectDetails.vue";
 export default {
   components: {
-    MenuBar
+    MenuBar,
+    Details
   },
   mounted() {
     this.getResultsPage();
@@ -41,7 +54,9 @@ export default {
     return {
       subjectList: [],
       loading: false,
-      errors: ""
+      error: "",
+      detailsFormVisible: false,
+      id: ""
     };
   },
   methods: {

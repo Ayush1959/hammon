@@ -1,26 +1,26 @@
 <template>
   <div>
     <el-dialog
-      title="Student Details"
+      title="Subject Details"
       :visible="detailsFormVisible"
       @close="closeDialog"
       v-loading="loading"
       custom-class="col-xs-10 col-md-8 col-lg-7"
       width="40%"
     >
-      <div class="pull-left w-100" v-if="studentDetails">
+      <div class="pull-left w-100" v-if="subjectDetails">
         <div class="row">
-          <div class="col-9 text-left">
-            <h5>Name:{{ studentDetails.name }}</h5>
+          <div class="col-8 text-left">
+            <h5>Name:{{ subjectDetails.name }}</h5>
           </div>
-          <div class="col-3 text-left">
-            <h5>Age:{{ studentDetails.age }}</h5>
+          <div class="col-4 text-left">
+            <h5>Credits:{{ subjectDetails.credits }}</h5>
           </div>
-          <div class="col-9 text-left">
-            <h5>Email:{{ studentDetails.email }}</h5>
+          <div class="col-8 text-left">
+            <h5>Teacher:{{ subjectDetails.teacher }}</h5>
           </div>
-          <div class="col-3 text-left">
-            <h5>Id:{{ studentDetails.id }}</h5>
+          <div class="col-4 text-left">
+            <h5>Id:{{ subjectDetails.id }}</h5>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
 export default {
   data: function() {
     return {
-      studentDetails: "",
+      subjectDetails: "",
       loading: false
     };
   },
@@ -48,34 +48,34 @@ export default {
       var app = this;
       if (app.detailsFormVisible) {
         if (app.id) {
-          app.getStudentDetails();
+          app.getSubjectDetails();
         }
       }
     }
   },
   methods: {
-    //------Get Student Details-----------------//
-    getStudentDetails() {
+    //------Get subject Details-----------------//
+    getSubjectDetails() {
       var app = this;
       app.loading = true;
       app.$axios
-        .get(app.$hostname + "/students/" + app.id + app.$api_keys)
+        .get(app.$hostname + "/subjects/" + app.id + app.$api_keys)
         .then(
           response => (
-            (app.studentDetails = response.data), (app.loading = false)
+            (app.subjectDetails = response.data), (app.loading = false)
           )
         )
         .catch(error => {
           app.error = error;
           app.$message({
-            message: "Student Details cannot be Loaded.",
+            message: "subject Details cannot be Loaded.",
             type: "error"
           });
           app.loading = false;
         })
         .finally(() => (app.loading = false));
     },
-    //------End of Get Student Details-----------//
+    //------End of Get subject Details-----------//
     //------Close detail popupp--------------//
     closeDialog() {
       this.$emit("update:id", "");

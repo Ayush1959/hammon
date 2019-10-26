@@ -6,7 +6,12 @@ require('bootstrap')
 // import BootstrapVue from 'bootstrap-vue'
 
 // Vue.use(BootstrapVue)
-
+import VeeValidate from "vee-validate";
+Vue.use(VeeValidate, {
+    events: "input|change|blur|xxx",
+    inject: true,
+    fieldsBagName: "veeFields"
+});
 
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -14,7 +19,7 @@ require('bootstrap')
 // var url = window.location.origin;
 Vue.prototype.$hostname = 'https://hamon-interviewapi.herokuapp.com';
 Vue.prototype.$api_key = '/?api_key=1Ee46';
-Vue.prototype.$api_keys = '/&api_key=1Ee46';
+Vue.prototype.$api_keys = '?api_key=1Ee46';
 
 import axios from 'axios'
 Vue.prototype.$axios = axios;
